@@ -1,9 +1,10 @@
 # 注：没有长期记忆，会产生幻觉（虚假情报），对话不稳定（对要求产生误解），无法进行长篇回答（初步判断是因为summarize的输入命令导致的，会强制缩短对话）
-
+import os
 from openai import OpenAI
 import asyncio
 
-
+api_key = os.environ.get('DEEPSEEK_API_KEY')
+print(api_key)
 
 async def multi_agent_interaction():
     print("INPUT 'quit' TO END THE CONVERSATION")
@@ -13,9 +14,9 @@ async def multi_agent_interaction():
             instruction = file.read()
         return instruction
 
-    surpervisor = OpenAI(api_key="sk-2c53a38332a4430398303a2184a5f409", base_url="https://api.deepseek.com")
-    agent = OpenAI(api_key="sk-2c53a38332a4430398303a2184a5f409", base_url="https://api.deepseek.com")
-    agent_speaker = OpenAI(api_key="sk-2c53a38332a4430398303a2184a5f409", base_url="https://api.deepseek.com")
+    surpervisor = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+    agent = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+    agent_speaker = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
 
     def read_history():
         with open("d:\\program\\agent\\history.txt", "r", encoding="utf-8") as file:
